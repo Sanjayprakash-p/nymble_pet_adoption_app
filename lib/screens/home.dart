@@ -26,10 +26,7 @@ class _HomePageState extends State<HomePage> {
   void _filterPets(String query) {
     setState(() {
       _filteredPets = pets
-          .where((pet) => pet.name
-              .split(" ")[0]
-              .toLowerCase()
-              .contains(query.toLowerCase()))
+          .where((pet) => pet.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }

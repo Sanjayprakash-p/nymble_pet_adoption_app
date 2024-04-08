@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:nymble_pet_adoption/components/data.dart';
 import 'package:nymble_pet_adoption/components/photoviewer.dart';
@@ -54,25 +55,6 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
                               width: double.infinity,
                             ),
                           ),
-                          // child:
-                          // PhotoView(
-                          //     imageProvider:
-                          //         AssetImage("assets/images/${pet.picture}"),
-
-                          //     backgroundDecoration: BoxDecoration(
-                          //         // color: themeData.colorScheme.onBackground.withOpacity(0.8),
-                          //         ),
-                          //     // enableRotation: widget.isParentRotation,
-                          //     errorBuilder: (BuildContext context, Object obj,
-                          //         StackTrace? stck) {
-                          //       return Center(
-                          //         child: Icon(
-                          //           Icons.help_outline,
-                          //           color:
-                          //               Theme.of(context).colorScheme.onPrimary,
-                          //         ),
-                          //       );
-                          //     }),
                         ),
                         IconButton(
                             onPressed: () => Navigator.pop(context),
@@ -87,7 +69,11 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
                         Align(
                           alignment: Alignment.topRight,
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                widget.pet.like = !widget.pet.like;
+                              });
+                            },
                             icon: CircleAvatar(
                               radius: 20,
                               backgroundColor: Colors.white.withOpacity(0.3),
@@ -107,73 +93,92 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  widget.pet.name,
-                  style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.w400),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.pet.name,
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.w400),
+                    ),
+                    Text(
+                      "\$ ${widget.pet.price}",
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        shape: BoxShape.rectangle,
-                        color: const Color(0xFFACD7FF),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Age ${widget.pet.age}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF48739B),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          shape: BoxShape.rectangle,
+                          color: const Color(0xFFACD7FF),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Age: ${widget.pet.age}",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF48739B),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        shape: BoxShape.rectangle,
-                        color: const Color(0xFFC5E59C),
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget.pet.address.split(",")[2],
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF6B8B42),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          shape: BoxShape.rectangle,
+                          color: const Color(0xFFC5E59C),
+                        ),
+                        child: Center(
+                          child: Text(
+                            widget.pet.address,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF6B8B42),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 35,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        shape: BoxShape.rectangle,
-                        color: const Color(0xFFF1E689),
-                      ),
-                      child: Center(
-                        child: Text(
-                          widget.pet.gender,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF978C2F),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          shape: BoxShape.rectangle,
+                          color: const Color(0xFFF1E689),
+                        ),
+                        child: Center(
+                          child: Text(
+                            widget.pet.gender,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF978C2F),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
                   padding: const EdgeInsets.all(16),
@@ -181,6 +186,9 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
                     widget.pet.about,
                     style: const TextStyle(fontSize: 15),
                   )),
+              const SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),
@@ -205,7 +213,7 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
             setState(() {});
           },
           child: widget.pet.isAdopted
-              ? Text(
+              ? const Text(
                   "Already Adopted",
                   style: TextStyle(color: Colors.white),
                 )
@@ -217,43 +225,27 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
   }
 
   Widget _buildAdoptionPopup(String petName) {
-    return Center(
-      child: Material(
-        color: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
+    return Stack(
+      children: [
+        AlertDialog(
+          title: Text(
+            "You’ve now adopted $petName",
+            style: TextStyle(fontSize: 20),
           ),
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'You’ve now adopted $petName',
-                style: const TextStyle(fontSize: 18.0),
-              ),
-              const SizedBox(height: 10.0),
-              // Only show confetti if playing
-              Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: ConfettiWidget(
-                    confettiController: confettiController,
-                    blastDirectionality: BlastDirectionality.explosive,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
-              ),
-            ],
-          ),
+          content: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Close")),
         ),
-      ),
+        Align(
+          alignment: Alignment.center,
+          child: ConfettiWidget(
+            confettiController: confettiController,
+            blastDirectionality: BlastDirectionality.explosive,
+          ),
+        )
+      ],
     );
   }
 }

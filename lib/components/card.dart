@@ -22,7 +22,7 @@ class _HomecardState extends State<Homecard> {
       color: widget.pet.isAdopted ? Colors.grey : Colors.white,
       surfaceTintColor: Colors.white,
       child: SizedBox(
-        width: double.infinity, // Set the card width to match the parent width
+        width: double.infinity,
         child: Column(
           children: [
             Expanded(
@@ -40,7 +40,7 @@ class _HomecardState extends State<Homecard> {
                             AssetImage('assets/images/${widget.pet.picture}'),
                       ),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                          const BorderRadius.all(Radius.circular(16.0)),
                     ),
                   ),
                   IconButton(
@@ -78,10 +78,14 @@ class _HomecardState extends State<Homecard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.pet.name.split(" ")[0],
-                                style: const TextStyle(
+                                widget.pet.name,
+                                style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .color,
                                 ),
                               ),
                               CircleAvatar(
@@ -103,12 +107,24 @@ class _HomecardState extends State<Homecard> {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.location_on_outlined),
+                            Icon(
+                              Icons.currency_rupee,
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .color,
+                            ),
                             Flexible(
                               child: Text(
-                                widget.pet.address.split(",")[2],
+                                widget.pet.price,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .color,
+                                ),
                               ),
                             ),
                           ],

@@ -30,52 +30,49 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: pages[selectedIndex],
-        bottomNavigationBar: Theme(
-          data: ThemeData(splashColor: Colors.transparent),
-          child: BottomNavigationBar(
-            selectedItemColor: const Color(0xFFF2968F),
-            showUnselectedLabels: false,
-            showSelectedLabels: false,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Image.asset(
-                    "assets/iconHome.png",
-                    height: 30,
-                    color: selectedIndex == 0 ? const Color(0xFFF2968F) : null,
-                  ),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset(
-                    "assets/iconFavorite.png",
-                    height: 30,
-                    color: selectedIndex == 1 ? const Color(0xFFF2968F) : null,
-                  ),
-                  label: ''),
-              BottomNavigationBarItem(
-                  // icon: Image.asset(
-                  //   "assets/iconUser.png",
-                  //   height: 30,
-                  //   color: selectedIndex == 3 ? const Color(0xFFF2968F) : null,
-                  // ),
-                  icon: Icon(
-                    Icons.history,
-                    size: 30,
-                    color: selectedIndex == 2
-                        ? const Color(0xFFF2968F)
-                        : const Color(0xFFACACAC),
-                  ),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Image.asset(
-                    "assets/iconUser.png",
-                    height: 30,
-                    color: selectedIndex == 3 ? const Color(0xFFF2968F) : null,
-                  ),
-                  label: ''),
-            ],
-            currentIndex: selectedIndex,
-            onTap: onItemTapped,
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: const Color(0xFFF2968F),
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/iconHome.png",
+                  height: 30,
+                  color: selectedIndex == 0 ? const Color(0xFFF2968F) : null,
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/iconFavorite.png",
+                  height: 30,
+                  color: selectedIndex == 1 ? const Color(0xFFF2968F) : null,
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                // icon: Image.asset(
+                //   "assets/iconUser.png",
+                //   height: 30,
+                //   color: selectedIndex == 3 ? const Color(0xFFF2968F) : null,
+                // ),
+                icon: Icon(
+                  Icons.history,
+                  size: 30,
+                  color: selectedIndex == 2
+                      ? const Color(0xFFF2968F)
+                      : const Color(0xFFACACAC),
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  "assets/iconUser.png",
+                  height: 30,
+                  color: selectedIndex == 3 ? const Color(0xFFF2968F) : null,
+                ),
+                label: ''),
+          ],
+          currentIndex: selectedIndex,
+          onTap: onItemTapped,
         ));
   }
 }
